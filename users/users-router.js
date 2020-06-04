@@ -18,7 +18,7 @@ router.get("/logout", (req, res) => {
             if (err) {
                 res.json({  message: "You can try to log out but i wont let you"})
             } else {
-                res.status(200).json({ message: "You have been logge out" });
+                res.status(200).json({ message: "You have been logged out" });
             }
         })
     } else {
