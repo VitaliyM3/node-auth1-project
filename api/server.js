@@ -1,12 +1,26 @@
 const express = require('express');
+const session = require('express-session');
 
 const usersRouter = require('../users/users-router.js');
 
 const server = express();
 
-server.use(express.json());
+const sessionConfig = {
+    name: "Apple",
+    secret: "This is my secret",
+    cookie: {
+        maxAge: 1000 * 20,
+        secure: false,
+        httpOnly: true,
+    },
+    resave: false,
+    saveUninitialized: false,
+};
 
-server.use('/api/users', usersRouter);
+server.use(express.json());
+server.use(session(sessionConfig));
+
+server.use('/api', usersRouter);
 
 server.get("/", (req, res) => {
     res.json({ api: "running" });
